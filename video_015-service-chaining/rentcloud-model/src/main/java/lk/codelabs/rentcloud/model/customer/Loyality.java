@@ -23,6 +23,7 @@ public class Loyality {
     Customer customer;
     int point;
     LocalDateTime expireDate;
+    
 	public int getTransactionId() {
 		return transactionId;
 	}
