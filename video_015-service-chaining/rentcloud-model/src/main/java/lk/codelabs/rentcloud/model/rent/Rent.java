@@ -24,6 +24,7 @@ public class Rent {
     LocalDateTime rentTill;
     int currentOdometer;
     String returnLocation;
+    
 	public int getRentId() {
 		return rentId;
 	}
