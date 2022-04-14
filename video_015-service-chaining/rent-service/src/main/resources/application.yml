@@ -12,5 +12,3 @@ spring:
       ddl-auto: update
   application:
     name: rent
-server:
-  port: 8181
