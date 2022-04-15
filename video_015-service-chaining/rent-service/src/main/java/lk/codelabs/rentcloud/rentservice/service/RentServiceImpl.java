@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -70,13 +72,19 @@ public class RentServiceImpl implements RentService {
         Rent rent=findById(id);
         Customer customer=getCustomer(rent.getCustomerId());
         Vehicle vehicle= getVehicle(rent.getVehicleId());
-
+        
         return new DetailResponse(rent,customer,vehicle);
 
 
     }
 
-    private Customer getCustomer(int customerId){
+    private DetailResponse findDetailResponseFallback(int id) {
+    	System.out.println("inside fallback method");
+    	return new DetailResponse(new Rent(), new Customer(), new Vehicle());
+	}
+
+
+	private Customer getCustomer(int customerId){
 
         Customer customer=restTemplate.getForObject("http://customer/services/customers/"+customerId,Customer.class);
         return customer;
